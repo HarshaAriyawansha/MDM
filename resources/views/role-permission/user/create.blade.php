@@ -4,7 +4,10 @@
 <div class="container">
     <div class ="row">
         <div class ="col-md-12">
-            <div class ="card-header">
+            @if (session('status'))
+                <div class="alert alert-success">{{ session('status') }}</div>
+            @endif
+            <div class ="card-header mb-4">
                 <h4>Create User
                     <a href="{{ url('users')}}" class="btn btn-danger float-end"> Back</a>
                 </h4>
@@ -16,14 +19,23 @@
                     <div class="mb-3">
                         <label for="">Name</label>
                         <input type="text" name="name" id="name" class ="form-control">
+                         @error('name')
+            <span class="text-danger small">{{ $message }}</span>
+        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Email</label>
                         <input type="email" name="email" id="email" class ="form-control">
+                        @error('email')
+            <span class="text-danger small">{{ $message }}</span>
+        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Password</label>
                         <input type="password" name="password" id="password" class ="form-control">
+                        @error('password')
+            <span class="text-danger small">{{ $message }}</span>
+        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Roles</label>

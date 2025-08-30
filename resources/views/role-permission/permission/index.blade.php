@@ -11,7 +11,9 @@
 
             <div class ="card-header mt-3">
                 <h4>Permission
-                    <a href="{{ route('permissions.create') }}" class="btn btn-primary float-end"> Add Permission</a>
+                    @can('create permission')
+                    <a href="{{ route('permissions.create') }}" class="btn btn-primary float-end mb-4"> Add Permission</a>
+                    @endcan
                 </h4>
             </div>
             <div class ="card-body">
@@ -29,16 +31,30 @@
                             <td>{{ $permission->id }}</td>
                             <td>{{ $permission->name }}</td>
                             <td>
-                                <a href="{{ url('permissions/'.$permission->id.'/edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="{{ url('permissions/'.$permission->id.'/delete') }}"><i class="fa-solid fa-trash"></i></a>
+                                @can('update permission')
+                                <a href="{{ url('permissions/'.$permission->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
+                                @endcan
+&nbsp;&nbsp;&nbsp;
+                                @can('delete permission')
+                                <a href="{{ url('permissions/'.$permission->id.'/delete') }}" class="btn btn-sm btn-danger">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
 
         </div>
     </div>
+    <div class="d-flex flex-column align-items-start mt-4">
+    <div class="mb-2">
+        Showing {{ $permissions->firstItem() }} to {{ $permissions->lastItem() }} of {{ $permissions->total() }} results
+    </div>
+    <div>
+        {{ $permissions->links('vendor.pagination.simple-bootstrap-5') }}
+    </div>
+</div>
 </div>
 @endsection

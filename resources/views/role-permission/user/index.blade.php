@@ -9,9 +9,11 @@
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
 
-            <div class ="card-header mt-3">
+            <div class ="card-header mt-3 mb-4">
                 <h4>User
+                    @can('create user')
                     <a href="{{ route('users.create') }}" class="btn btn-primary float-end"> Add User</a>
+                    @endcan
                 </h4>
             </div>
             <div class ="card-body">
@@ -39,8 +41,13 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ url('users/'.$user->id.'/edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="{{ url('users/'.$user->id.'/delete') }}"><i class="fa-solid fa-trash"></i></a>
+                                @can('update user')
+                                <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">Edit</a>
+                                @endcan
+                                &nbsp;&nbsp;
+                                @can('delete user')
+                                <a href="{{ url('users/'.$user->id.'/delete') }}" class="btn btn-danger">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -50,5 +57,15 @@
 
         </div>
     </div>
+    <div class="d-flex flex-column align-items-start mt-4">
+    <div class="mb-2">
+        Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} results
+    </div>
+    <div>
+        {{ $users->links('vendor.pagination.simple-bootstrap-5') }}
+    </div>
+</div>
+
+
 </div>
 @endsection

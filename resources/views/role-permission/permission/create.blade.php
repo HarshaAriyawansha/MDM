@@ -4,7 +4,7 @@
 <div class="container">
     <div class ="row">
         <div class ="col-md-12">
-            <div class ="card-header">
+            <div class ="card-header mb-4">
                 <h4>Create Permission
                     <a href="{{ url('permissions')}}" class="btn btn-danger float-end"> Back</a>
                 </h4>
@@ -16,6 +16,9 @@
                     <div class="mb-3">
                         <label for="">Permission Name</label>
                         <input type="text" name="name" id="name" class ="form-control">
+                        @error('name')
+            <span class="text-danger small">{{ $message }}</span>
+        @enderror
                     </div>
                     <div class = "mb-3">
                         <button type="submit" class="btn btn-primary"> Save</button>

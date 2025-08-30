@@ -14,21 +14,6 @@
 </head>
 <body class="d-flex">
 
-    {{-- Sidebar --}}
-    @include('layouts.sidebar')
-
-    <div class="flex-grow-1 d-flex flex-column">
-
-        {{-- Header --}}
-        @include('layouts.header')
-
-
-        {{-- Page Content --}}
-        <main class="p-3">
-            @yield('content')
-        </main>
-
-    </div>
 
     <!-- Bootstrap JS Bundle (with Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -9,9 +9,18 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-        public function index()
+    public function __construct(){
+        $this->middleware('permission:view role', ['only' => ['index']]);
+       $this->middleware('permission:create role', ['only' => ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']]);
+        $this->middleware('permission:update role', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+    }
+    
+    public function index()
     {
-        $roles = Role::get();
+        //$roles = Role::get();
+         $roles = Role::query()->paginate(5)->withQueryString();
+
         return view('role-permission.role.index', [
             'roles' => $roles
         ]);
